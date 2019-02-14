@@ -1,6 +1,6 @@
 package main.com.alex.tictactoe;
 
-enum State {Blank, X, O}
+enum State {BLANK, X, O}
 
 public class Field {
 

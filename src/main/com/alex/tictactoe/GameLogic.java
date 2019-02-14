@@ -40,7 +40,6 @@ public class GameLogic {
                 }
             }
         }
-
         sc.close();
     }
 
@@ -51,24 +50,23 @@ public class GameLogic {
         isGameOver = false;
         isGameExit = false;
         turnNumber = 1;
-        winner = State.Blank;
+        winner = State.BLANK;
         turnsLeftCounter = Field.FIELD_WIDTH * Field.FIELD_WIDTH;
     }
 
     //метод сделать ход
     private void makeTurn() {
-
         try {
             int index = sc.nextInt();
 
-            if (!IsIndexCorrect(index))
+            if (!isIndexCorrect(index))
                 return;
 
             f.save(index, (isTurnCrossPlayer) ? State.X.toString() : State.O.toString());
             turnNumber++;
             turnsLeftCounter--;
 
-            isGameOver = IsGameOver(index);
+            isGameOver = isGameOver(index);
         } catch (Exception ex) {
 
             if (sc.next().equalsIgnoreCase("q")) {
@@ -79,7 +77,7 @@ public class GameLogic {
         }
     }
 
-    private boolean IsIndexCorrect(int index) {
+    private boolean isIndexCorrect(int index) {
         if (index < 0 ||
                 index >= Field.FIELD_WIDTH * Field.FIELD_WIDTH ||
                 !f.isBlank(index)) {
@@ -91,7 +89,7 @@ public class GameLogic {
     }
 
     //метод завершения игры
-    private boolean IsGameOver(int index) {
+    private boolean isGameOver(int index) {
 
         if (turnsLeftCounter == 0)
             return true;
@@ -116,7 +114,7 @@ public class GameLogic {
         showField();
         System.out.print("Игра окончена!");
 
-        if (winner == State.Blank) {
+        if (winner == State.BLANK) {
             System.out.println(" Ничья.");
         } else {
             System.out.println(" Выиграл игрок " + winner + ".");
